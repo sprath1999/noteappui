@@ -1,0 +1,21 @@
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.add-note-btn {
+  margin-top: 20px;
+  padding: 10px 14px;
+  width: 100%;
+  background-color: #0984e3;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-note-btn:hover {
+  background-color: #74b9ff;
+}
