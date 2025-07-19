@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../styles/sidebar.css";
 
 export default function Sidebar({
@@ -6,6 +6,7 @@ export default function Sidebar({
   selectedCategoryId,
   onSelectCategory,
   onAddCategory,
+  onDeleteCategory, // ✅ New prop
 }) {
   const [showForm, setShowForm] = useState(false);
   const [newCatName, setNewCatName] = useState("");
@@ -16,6 +17,7 @@ export default function Sidebar({
     setNewCatName("");
     setShowForm(false);
   };
+
   return (
     <aside className="sidebar">
       <h3 className="sidebar-title">Categories</h3>
@@ -23,11 +25,6 @@ export default function Sidebar({
         {categories.map((category) => (
           <li
             key={category.id}
-            // className={
-            //   selectedCategoryId === category.id
-            //     ? "category-item active"
-            //     : "category-item"
-            // }
             style={{
               fontWeight:
                 selectedCategoryId === category.id ? "bold" : "normal",
@@ -36,24 +33,37 @@ export default function Sidebar({
               borderRadius: "6px",
               backgroundColor:
                 selectedCategoryId === category.id ? "#dfefff" : "transparent",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
-            onClick={() => onSelectCategory(category.id)}
           >
-            {category.name}
+            <span onClick={() => onSelectCategory(category.id)}>
+              {category.name}
+            </span>
+            <button
+              onClick={() => onDeleteCategory(category.id)}
+              style={{
+                background: "transparent",
+                border: "none",
+                color: "red",
+                cursor: "pointer",
+                fontSize: "16px",
+              }}
+              title="Delete Category"
+            >
+              ✕
+            </button>
           </li>
         ))}
       </ul>
 
-      {/* <button className="add-note-btn" onClick={onAddCategory}>
-        + Add Category
-      </button> */}
       {!showForm && (
         <button className="add-category-btn" onClick={() => setShowForm(true)}>
           + Add Category
         </button>
       )}
 
-      {/* Inline Add Category Form */}
       {showForm && (
         <div style={{ marginTop: "10px" }}>
           <input

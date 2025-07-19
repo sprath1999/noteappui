@@ -2,7 +2,7 @@ import profileImg from "../assets/profile.png";
 import "../styles/navbar.css";
 export default function Navbar() {
   return (
-    <nav className="navbar">
+    <div className="navbar">
       <div className="logo">📝 Note Manager</div>
 
       <div className="search-bar">
@@ -16,6 +16,6 @@ export default function Navbar() {
           <p>Logout</p>
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

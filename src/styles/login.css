@@ -70,3 +70,51 @@
   font-size: 14px;
   color: #636e72;
 }
+
+@media (max-width: 768px) {
+  .login-card {
+    padding: 30px 20px;
+    max-width: 90%;
+    margin: 15px;
+  }
+
+  .app-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .login-form input,
+  .login-form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .register-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 25px 15px;
+    border-radius: 10px;
+    margin: 15px;
+  }
+
+  .app-title {
+    font-size: 18px;
+  }
+
+  .login-form {
+    gap: 12px;
+  }
+
+  .error-text {
+    font-size: 13px;
+  }
+
+  .register-text {
+    font-size: 12px;
+    text-align: center;
+  }
+}

@@ -29,3 +29,8 @@ export const updateNote = async ({ id, formData }) => {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };
+
+export const deleteCategoryById = async (categoryId) => {
+  const res = await axios.delete(`/api/categories/delete/${categoryId}`);
+  return res.data;
+};
