@@ -2,7 +2,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNoteById } from "../api/noteservice";
-import axios from "axios";
+import "../styles/viewnotepage.css";
+import { MdNote } from "react-icons/md"; // Material Design note icon
+import { FiArrowLeft } from "react-icons/fi";
 
 export default function ViewNotePage() {
   const { id } = useParams();
@@ -21,23 +23,36 @@ export default function ViewNotePage() {
   if (isError || !note) return <p>Note not found.</p>;
 
   return (
-    <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
-      <button onClick={() => navigate(-1)} style={{ marginBottom: "20px" }}>
-        ⬅ Back
+    <div className="view-note-container">
+      <button className="view-note-back" onClick={() => navigate(-1)}>
+        <FiArrowLeft size={20} />
+        Back
       </button>
 
-      <h1>{note.title}</h1>
-      <p style={{ whiteSpace: "pre-wrap", marginTop: "20px" }}>
-        {note.content}
-      </p>
+      <h1 className="view-note-title">{note.title}</h1>
 
-      <a
-        href={`http://localhost:8080/files/${note.documentPath}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        📄 View Document
-      </a>
+      <p className="view-note-content">{note.content}</p>
+
+      {note.documentPath && (
+        <a
+          className="view-note-link"
+          href={`http://localhost:8080/files/${note.documentPath}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <MdNote size={20} />
+            <span>View Document</span>
+          </div>
+        </a>
+      )}
     </div>
   );
 }

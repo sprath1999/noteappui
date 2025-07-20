@@ -5,20 +5,16 @@ import NoteCard from "../components/NotesCard";
 import { useCategories } from "../hooks/useCategories";
 import "../styles/dashboard.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCategory } from "../api/noteservice";
+import { createCategory, deleteCategoryById } from "../api/noteservice";
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const { data: categories = [], isLoading, isError } = useCategories();
-
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const queryClient = useQueryClient();
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(categories);
-
     if (categories.length > 0 && selectedCategoryId === null) {
       setSelectedCategoryId(categories[0].id);
     }
@@ -30,29 +26,46 @@ export default function Dashboard() {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
   });
+
+  const { mutate: deleteCategory } = useMutation({
+    mutationFn: deleteCategoryById,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      setSelectedCategoryId(null);
+    },
+  });
+
   const handleSelectCategory = (id) => {
     setSelectedCategoryId(id);
   };
-
-  const selectedNotes =
-    categories.find((cat) => cat.id === selectedCategoryId)?.notes || [];
 
   const handleAddCategory = (name) => {
     addCategory(name);
   };
 
+  const handleDeleteCategory = (id) => {
+    deleteCategory(id);
+  };
+
+  const selectedNotes =
+    categories.find((cat) => cat.id === selectedCategoryId)?.notes || [];
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <>
-      <Navbar />
-      <div style={{ display: "flex" }}>
+      <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+      <div className="dashboard-content">
         <Sidebar
           categories={categories}
           selectedCategoryId={selectedCategoryId}
           onSelectCategory={handleSelectCategory}
           onAddCategory={handleAddCategory}
+          onDeleteCategory={handleDeleteCategory}
+          isOpen={sidebarOpen}
         />
 
-        <div style={{ flex: 1, padding: "20px" }}>
+        <div>
           <div
             style={{
               display: "flex",
