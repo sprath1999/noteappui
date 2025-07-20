@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/authThunks";
 import { useNavigate } from "react-router-dom";
+import notelogo from "../assets/notera.png";
+
 import "../styles/login.css";
 
 export default function Login() {
@@ -33,7 +35,11 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="app-title">📝 Note Manager</h2>
+        <div className="app-title">
+          {" "}
+          <img src={notelogo} alt="logo" className="note-logo" />
+          <span style={{ color: "#3053bf" }}>Notera</span>
+        </div>
         <form onSubmit={handleSubmit} className="login-form">
           <input
             type="email"

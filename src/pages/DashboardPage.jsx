@@ -50,18 +50,19 @@ export default function Dashboard() {
   const selectedNotes =
     categories.find((cat) => cat.id === selectedCategoryId)?.notes || [];
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-      <div style={{ width: "100%" }}>
-        <Navbar />
-      </div>
-      <div style={{ display: "flex" }}>
+    <>
+      <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+      <div className="dashboard-content">
         <Sidebar
           categories={categories}
           selectedCategoryId={selectedCategoryId}
           onSelectCategory={handleSelectCategory}
           onAddCategory={handleAddCategory}
-          onDeleteCategory={handleDeleteCategory} // ✅ NEW PROP
+          onDeleteCategory={handleDeleteCategory}
+          isOpen={sidebarOpen}
         />
 
         <div>
@@ -113,6 +114,6 @@ export default function Dashboard() {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

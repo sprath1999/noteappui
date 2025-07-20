@@ -1,0 +1,84 @@
+.add-note-container {
+  padding: 20px;
+  /* max-width: 700px; */
+  height: 100vh;
+  /* margin: auto; */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #669acf, #bed7e3, #ffffff);
+}
+
+.add-note-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-note-form input[type="text"],
+.add-note-form textarea,
+.add-note-form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.85
+  ); /* light background for contrast */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.add-note-form input[type="text"]:focus,
+.add-note-form textarea:focus {
+  border-color: #4a90e2; /* soft blue border */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3); /* glowing blue focus ring */
+}
+
+.add-note-form textarea {
+  /* resize: vertical; */
+  min-height: 420px;
+}
+
+.add-note-form .attached-document {
+  margin-bottom: 10px;
+  font-style: italic;
+  color: #555;
+  font-size: 14px;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+}
+
+.button-group button {
+  padding: 10px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-group button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.button-group button[type="submit"]:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.button-group button[type="button"] {
+  background-color: #f0f0f0;
+}
+
+.button-group button:hover:not(:disabled) {
+  opacity: 0.9;
+}

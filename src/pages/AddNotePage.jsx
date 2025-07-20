@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addNewNote, updateNote } from "../api/noteservice";
-
+import "../styles/addnewpage.css";
 export default function AddNotePage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function AddNotePage() {
 
     if (isEdit && noteData) {
       setTitle(noteData.title || "");
-      setContent(noteData.content || "");
+      setContent(noteData.content.trim() || "");
       setDocumentName(noteData.documentPath || "");
     }
   }, [isEdit, noteData]);
@@ -87,28 +87,20 @@ export default function AddNotePage() {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "700px", margin: "auto" }}>
+    <div className="add-note-container">
       <h2>{isEdit ? "Edit Note" : "Add New Note"}</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="add-note-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
         />
 
         <textarea
           placeholder="Content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          style={{
-            width: "100%",
-            height: "180px",
-            padding: "8px",
-            marginBottom: "10px",
-            resize: "vertical",
-          }}
         />
 
         <input
@@ -118,18 +110,15 @@ export default function AddNotePage() {
             setFile(e.target.files[0]);
             setDocumentName(e.target.files[0]?.name || "");
           }}
-          style={{ marginBottom: "10px" }}
         />
 
         {isEdit && noteData?.documentPath && (
-          <div
-            style={{ marginBottom: "10px", fontStyle: "italic", color: "#555" }}
-          >
-            Attached Document: {noteData?.documentPath}
+          <div className="attached-document">
+            Attached Document: {documentName}
           </div>
         )}
 
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div className="button-group">
           <button type="submit" disabled={adding || updating}>
             {adding || updating ? "Saving..." : "Save"}
           </button>

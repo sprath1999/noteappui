@@ -13,7 +13,7 @@ import {
 import Dashboard from "./pages/DashboardPage";
 import AddNotePage from "./pages/AddNotePage";
 import ViewNotePage from "./pages/ViewNotePage";
-
+import "./global.css";
 function App() {
   return (
     <Routes>

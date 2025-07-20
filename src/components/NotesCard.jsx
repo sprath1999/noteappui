@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { deleteNoteById } from "../api/noteservice";
 import "../styles/notecard.css";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 
 export default function NoteCard({ note, categoryId }) {
   const navigate = useNavigate();
@@ -38,14 +39,22 @@ export default function NoteCard({ note, categoryId }) {
       <div className="note-header">
         <h4 className="note-title">{note.title}</h4>
         <div className="note-icons">
-          <span title="View" onClick={() => navigate(`/notes/${note.id}`)}>
-            👁️
+          <span
+            title="View"
+            className="note-action-icon"
+            onClick={() => navigate(`/notes/${note.id}`)}
+          >
+            <FaEye style={{ color: "669acf", cursor: "pointer" }} />
           </span>
-          <span title="Edit" onClick={handleEdit}>
-            ✏️
+          <span title="Edit" className="note-action-icon" onClick={handleEdit}>
+            <FaEdit style={{ color: "93af93", cursor: "pointer" }} />
           </span>
-          <span title="Delete" onClick={handleDelete}>
-            🗑️
+          <span
+            title="Delete"
+            className="note-action-icon"
+            onClick={handleDelete}
+          >
+            <FaTrash style={{ color: "c95e5e", cursor: "pointer" }} />
           </span>
         </div>
       </div>

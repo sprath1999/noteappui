@@ -7,6 +7,7 @@ export default function Sidebar({
   onSelectCategory,
   onAddCategory,
   onDeleteCategory, // ✅ New prop
+  isOpen,
 }) {
   const [showForm, setShowForm] = useState(false);
   const [newCatName, setNewCatName] = useState("");
@@ -19,7 +20,7 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="sidebar">
+    <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <h3 className="sidebar-title">Categories</h3>
       <ul className="category-list">
         {categories.map((category) => (
@@ -71,21 +72,28 @@ export default function Sidebar({
             placeholder="Category name"
             value={newCatName}
             onChange={(e) => setNewCatName(e.target.value)}
-            style={{ width: "100%", padding: "6px", marginBottom: "6px" }}
+            className="addnewcatinp"
           />
           <div style={{ display: "flex", gap: "6px" }}>
-            <button onClick={handleAdd}>Save</button>
+            <button
+              onClick={handleAdd}
+              className="save-category-btn"
+              disabled={!newCatName.trim()}
+            >
+              Save
+            </button>
             <button
               onClick={() => {
                 setShowForm(false);
                 setNewCatName("");
               }}
+              className="cancel-category-btn"
             >
               Cancel
             </button>
           </div>
         </div>
       )}
-    </aside>
+    </div>
   );
 }

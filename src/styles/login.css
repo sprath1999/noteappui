@@ -22,7 +22,13 @@
 .app-title {
   font-size: 24px;
   margin-bottom: 25px;
-  color: #2d3436;
+  color: #02109d;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: emoji;
+  font-style: italic;
 }
 
 .login-form {
