@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import notelogo from "../assets/notera.png";
 
 import "../styles/login.css";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ export default function Login() {
   const { token, loading, error } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -25,6 +28,10 @@ export default function Login() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleSubmit = (e) => {
@@ -49,14 +56,19 @@ export default function Login() {
             onChange={handleChange}
             required
           />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+          <div className="password-input-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <span className="eye-icon" onClick={togglePasswordVisibility}>
+              {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+            </span>
+          </div>
           <button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
           </button>
