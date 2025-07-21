@@ -50,7 +50,7 @@ export default function AddNotePage() {
   useEffect(() => {
     const fetchExistingFile = async () => {
       if (noteData?.documentPath && !file) {
-        const url = `https://noteappservices-production.up.railway.app/files/${noteData.documentPath}`; // replace with your actual base URL
+        const url = `https://localhost:3306/files/${noteData.documentPath}`; // replace with your actual base URL
         const response = await fetch(url);
         const blob = await response.blob();
         const filename = noteData.documentPath.split("_").pop();

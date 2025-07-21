@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://noteappservices-production.up.railway.app",
+  baseURL: "https://localhost:3306",
 });
 
 instance.interceptors.request.use((config) => {

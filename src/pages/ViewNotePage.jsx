@@ -35,7 +35,7 @@ export default function ViewNotePage() {
       {note.documentPath && (
         <a
           className="view-note-link"
-          href={`https://noteappservices-production.up.railway.app/files/${note.documentPath}`}
+          href={`https://localhost:3306/files/${note.documentPath}`}
           target="_blank"
           rel="noopener noreferrer"
         >
