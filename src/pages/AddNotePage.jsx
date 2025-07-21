@@ -18,9 +18,6 @@ export default function AddNotePage() {
   const [documentName, setDocumentName] = useState("");
 
   useEffect(() => {
-    console.log(noteData);
-    console.log(selectedCategoryId);
-
     if (isEdit && noteData) {
       setTitle(noteData.title || "");
       setContent(noteData.content.trim() || "");
@@ -57,11 +54,9 @@ export default function AddNotePage() {
     };
 
     fetchExistingFile();
-  }, [noteData]);
+  }, [noteData, file]);
 
   const handleSubmit = (e) => {
-    console.log(selectedCategoryId);
-
     e.preventDefault();
 
     if (!title || !content) {
@@ -69,7 +64,6 @@ export default function AddNotePage() {
     }
 
     const formData = new FormData();
-    console.log(selectedCategoryId);
 
     formData.append("title", title);
     formData.append("content", content);
