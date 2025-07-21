@@ -1,12 +1,16 @@
-import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useState, useEffect } from "react";
 import NoteCard from "../components/NotesCard";
 import { useCategories } from "../hooks/useCategories";
 import "../styles/dashboard.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCategory, deleteCategoryById } from "../api/noteservice";
+import {
+  createCategory,
+  deleteCategoryById,
+  searchNotesInCategory,
+} from "../api/noteservice";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
   const { data: categories = [], isLoading, isError } = useCategories();
@@ -34,6 +38,28 @@ export default function Dashboard() {
       setSelectedCategoryId(null);
     },
   });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredNotes, setFilteredNotes] = useState([]);
+
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      const selectedNotes =
+        categories.find((cat) => cat.id === selectedCategoryId)?.notes || [];
+      setFilteredNotes(selectedNotes);
+    }
+  }, [searchTerm, categories, selectedCategoryId]);
+
+  const handleSearch = async (term) => {
+    setSearchTerm(term);
+    if (term.trim() === "") return;
+
+    try {
+      const res = await searchNotesInCategory(term, selectedCategoryId);
+      setFilteredNotes(res);
+    } catch (err) {
+      console.error("Search failed", err);
+    }
+  };
 
   const handleSelectCategory = (id) => {
     setSelectedCategoryId(id);
@@ -54,7 +80,10 @@ export default function Dashboard() {
 
   return (
     <>
-      <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+      <Navbar
+        onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+        onSearch={handleSearch}
+      />
       <div className="dashboard-content">
         <Sidebar
           categories={categories}
@@ -99,11 +128,11 @@ export default function Dashboard() {
             <p>Loading...</p>
           ) : isError ? (
             <p>Something went wrong while fetching categories.</p>
-          ) : selectedNotes.length === 0 ? (
-            <p>No notes in this category.</p>
+          ) : filteredNotes.length === 0 ? (
+            <p>No notes found in this category.</p>
           ) : (
             <div className="notes-grid">
-              {selectedNotes.map((note) => (
+              {filteredNotes.map((note) => (
                 <NoteCard
                   key={note.id}
                   note={note}

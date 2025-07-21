@@ -5,10 +5,17 @@ import { FaSearch, FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../features/auth/authSlice";
+import { useState } from "react";
 
-export default function Navbar({ onToggleSidebar }) {
+export default function Navbar({ onToggleSidebar, onSearch }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchInput, setSearchInput] = useState("");
+
+  const handleInputChange = (e) => {
+    setSearchInput(e.target.value);
+    onSearch(e.target.value);
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -30,6 +37,8 @@ export default function Navbar({ onToggleSidebar }) {
           type="text"
           placeholder="Search notes..."
           name="search"
+          value={searchInput}
+          onChange={handleInputChange}
           className="inp_search"
         />
         <FaSearch

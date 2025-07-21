@@ -34,3 +34,12 @@ export const deleteCategoryById = async (categoryId) => {
   const res = await axios.delete(`/api/categories/delete/${categoryId}`);
   return res.data;
 };
+
+export const searchNotesInCategory = async (title, categoryId) => {
+  const res = await axios.get(
+    `/api/notes/search?title=${encodeURIComponent(
+      title
+    )}&categoryId=${categoryId}`
+  );
+  return res.data;
+};
