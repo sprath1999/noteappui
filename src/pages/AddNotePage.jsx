@@ -102,6 +102,9 @@ export default function AddNotePage() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
+        <div style={{ marginBottom: "10px" }}>
+          <i>Document Upload feature Coming Soon.......</i>
+        </div>
 
         {/* <input
           type="file"
