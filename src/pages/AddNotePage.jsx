@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addNewNote, updateNote } from "../api/noteservice";
+import { useMemo } from "react";
 import "../styles/addnewpage.css";
 export default function AddNotePage() {
   const location = useLocation();
@@ -9,7 +10,12 @@ export default function AddNotePage() {
   const queryClient = useQueryClient();
 
   const isEdit = location.state?.isEdit || false;
-  const noteData = location.state?.noteData || {};
+  // const noteData = location.state?.noteData || {};
+
+  const noteData = useMemo(
+    () => location.state?.noteData || {},
+    [location.state?.noteData]
+  );
   const selectedCategoryId = location.state?.selectedCategoryId;
 
   const [title, setTitle] = useState("");
