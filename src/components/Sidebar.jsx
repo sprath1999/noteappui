@@ -6,7 +6,7 @@ export default function Sidebar({
   selectedCategoryId,
   onSelectCategory,
   onAddCategory,
-  onDeleteCategory, // ✅ New prop
+  onDeleteCategory,
   isOpen,
 }) {
   const [showForm, setShowForm] = useState(false);

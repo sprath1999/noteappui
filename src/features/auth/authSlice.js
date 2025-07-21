@@ -1,4 +1,3 @@
-// src/features/auth/authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser } from "./authThunks";
 
@@ -34,9 +33,7 @@ const authSlice = createSlice({
         state.error = action.error.message;
       })
 
-      .addCase(registerUser.fulfilled, (state, action) => {
-        // Optionally auto-login after register
-      });
+      .addCase(registerUser.fulfilled, (state, action) => {});
   },
 });
 

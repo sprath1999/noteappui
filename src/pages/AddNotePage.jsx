@@ -64,7 +64,7 @@ export default function AddNotePage() {
 
     e.preventDefault();
 
-    if (!title || !content || (!file && !isEdit)) {
+    if (!title || !content) {
       return alert("All fields are required");
     }
 
@@ -103,14 +103,14 @@ export default function AddNotePage() {
           onChange={(e) => setContent(e.target.value)}
         />
 
-        <input
+        {/* <input
           type="file"
           accept=".pdf,.doc,.docx"
           onChange={(e) => {
             setFile(e.target.files[0]);
             setDocumentName(e.target.files[0]?.name || "");
           }}
-        />
+        /> */}
 
         {isEdit && noteData?.documentPath && (
           <div className="attached-document">

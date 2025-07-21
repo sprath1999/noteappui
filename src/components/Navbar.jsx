@@ -1,5 +1,4 @@
 import profileImg from "../assets/profile.png";
-import notelogo from "../assets/notelogo.png";
 import "../styles/navbar.css";
 import { FaSearch, FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

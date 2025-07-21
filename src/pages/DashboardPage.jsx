@@ -73,9 +73,6 @@ export default function Dashboard() {
     deleteCategory(id);
   };
 
-  const selectedNotes =
-    categories.find((cat) => cat.id === selectedCategoryId)?.notes || [];
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (

@@ -1,9 +1,8 @@
-// src/pages/ViewNotePage.jsx
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNoteById } from "../api/noteservice";
 import "../styles/viewnotepage.css";
-import { MdNote } from "react-icons/md"; // Material Design note icon
+import { MdNote } from "react-icons/md";
 import { FiArrowLeft } from "react-icons/fi";
 
 export default function ViewNotePage() {

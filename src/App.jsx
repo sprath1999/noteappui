@@ -4,12 +4,7 @@ import Register from "./pages/Register";
 import "./App.css";
 import ProtectedRoute from "./components/protectedRoute";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/DashboardPage";
 import AddNotePage from "./pages/AddNotePage";
 import ViewNotePage from "./pages/ViewNotePage";
