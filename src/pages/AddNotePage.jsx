@@ -50,7 +50,7 @@ export default function AddNotePage() {
   useEffect(() => {
     const fetchExistingFile = async () => {
       if (noteData?.documentPath && !file) {
-        const url = `https://localhost:3306/files/${noteData.documentPath}`; // replace with your actual base URL
+        const url = `http://localhost:8080/files/${noteData.documentPath}`;
         const response = await fetch(url);
         const blob = await response.blob();
         const filename = noteData.documentPath.split("_").pop();
@@ -102,18 +102,18 @@ export default function AddNotePage() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <div style={{ marginBottom: "10px" }}>
+        {/* <div style={{ marginBottom: "10px" }}>
           <i>Document Upload feature Coming Soon.......</i>
-        </div>
+        </div> */}
 
-        {/* <input
+        <input
           type="file"
           accept=".pdf,.doc,.docx"
           onChange={(e) => {
             setFile(e.target.files[0]);
             setDocumentName(e.target.files[0]?.name || "");
           }}
-        /> */}
+        />
 
         {isEdit && noteData?.documentPath && (
           <div className="attached-document">
